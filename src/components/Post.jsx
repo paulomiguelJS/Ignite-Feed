@@ -16,7 +16,9 @@ export function Post() {
           </div>
         </div>
 
-        <time title="May, 11 08:13am" dateTime="2022-05-11 08:13:30">Published 1 hour ago</time>
+        <time title="May, 11 08:13am" dateTime="2022-05-11 08:13:30">
+          Published 1 hour ago
+        </time>
       </header>
       <div className={styles.content}>
         <p>Fala pessoal 👋</p>
@@ -32,6 +34,14 @@ export function Post() {
           <a href=""> devonlane.design #uiux #userexperience</a>{" "}
         </p>
       </div>
+
+      <form className={styles.commentForm}>
+        <strong>Leave your comment</strong>
+        <textarea placeholder="Leave an comment"></textarea>
+        <footer>
+          <button type="submit">Comment</button>
+        </footer>
+      </form>
     </article>
   );
 }
