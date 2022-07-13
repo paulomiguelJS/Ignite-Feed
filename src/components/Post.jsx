@@ -3,15 +3,16 @@ import { Comment } from "./Comment";
 
 import styles from "./Post.module.css";
 
-export function Post() {
+
+export function Post({author}) {
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar hasBorder src="https://github.com/paulomigueljs.png" />
+          <Avatar hasBorder src={author.avatarUrl} />
           <div className={styles.authorInfo}>
-            <strong>Paulo Miguel</strong>
-            <span>Web Developer</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
 
@@ -19,20 +20,7 @@ export function Post() {
           Published 1 hour ago
         </time>
       </header>
-      <div className={styles.content}>
-        <p>Fala pessoal 👋</p>
-        <p>
-          Finalmente finalizei meu novo site/portfólio. Foi um baita desafio
-          criar todo o design e codar na unha, mas consegui 💪🏻 Acesse e deixe
-          seu feedback
-        </p>
-        <p>
-          👉<a href="">paulomigueljs/github</a>
-        </p>
-        <p>
-          <a href=""> devonlane.design #uiux #userexperience</a>{" "}
-        </p>
-      </div>
+      <div className={styles.content}></div>
 
       <form className={styles.commentForm}>
         <strong>Leave your comment</strong>
