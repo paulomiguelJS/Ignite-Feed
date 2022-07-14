@@ -14,11 +14,11 @@ const posts = [
       role: " Front End Developer",
     },
     content: [
-      { type: "paragraph", content: "Fala Galera 👋" },
+      { type: "paragraph", content: "Hey everyone 👋" },
       {
         type: "paragraph",
         content:
-          "Finalmente finalizei meu novo site/portfólio. Foi um baita desafio criar todo o design e codar na unha, mas consegui 💪🏻 Acesse e deixe seu feedback",
+          "Maybe that’s what batman is about. Not winning...but failing, and getting back up. Knowing he’ll fail, fail a thousand times, but still won’t give up.",
       },
       { type: "link", content: "👉paulomigueljs/github" },
     ],
@@ -32,11 +32,11 @@ const posts = [
       role: "Full Stack Developer",
     },
     content: [
-      { type: "paragraph", content: "Fala Galera 👋" },
+      { type: "paragraph", content: "Hey everyone👋" },
       {
         type: "paragraph",
         content:
-          "Finalmente finalizei meu novo site/portfólio. Foi um baita desafio criar todo o design e codar na unha, mas consegui 💪🏻 Acesse e deixe seu feedback",
+          "Maybe that’s what batman is about. Not winning...but failing, and getting back up. Knowing he’ll fail, fail a thousand times, but still won’t give up.",
       },
       { type: "link", content: "👉paulomigueljs/github" },
     ],
