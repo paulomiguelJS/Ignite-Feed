@@ -3,7 +3,7 @@ import { Avatar } from "./Avatar";
 
 import styles from "./Comment.module.css";
 
-export function Comment() {
+export function Comment({content}) {
  
   
   return (
@@ -22,7 +22,7 @@ export function Comment() {
               <Trash size={24} />
             </button>
           </header>
-          <p>Very Nice!</p>
+          <p>{content}</p>
         </div>
         <footer>
           <button>
