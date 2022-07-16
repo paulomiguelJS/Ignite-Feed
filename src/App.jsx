@@ -1,6 +1,6 @@
 import { Header } from "./components/Header";
-import { Sidebar } from './components/Sidebar'
-import { Post } from './components/Post'
+import { Sidebar } from "./components/Sidebar";
+import { Post } from "./components/Post";
 
 import styles from "./App.module.css";
 import "./global.css";
@@ -44,23 +44,23 @@ const posts = [
   },
 ];
 
-
 export function App() {
   return (
     <>
       <Header />
       <div className={styles.wrapper}>
-        <Sidebar  />
+        <Sidebar />
         <main>
-        {posts.map(post => {
-          return (
-          <Post 
-            author={post.author}
-            content={post.content}
-            publishedAt={post.publishedAt}
-          />
-          )
-        })}
+          {posts.map((post, index) => {
+            return (
+              <Post
+                key={index}
+                author={post.author}
+                content={post.content}
+                publishedAt={post.publishedAt}
+              />
+            );
+          })}
         </main>
       </div>
     </>

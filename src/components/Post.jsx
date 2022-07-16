@@ -1,6 +1,6 @@
 import { format, formatDistanceToNow } from "date-fns";
 import enUS from "date-fns/locale/en-US";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Avatar } from "./Avatar";
 import { Comment } from "./Comment";
@@ -8,9 +8,10 @@ import { Comment } from "./Comment";
 import styles from "./Post.module.css";
 
 export function Post({ author, publishedAt, content }) {
-  const [newCommentText, setNewCommentText] = useState([]);
+  const [newCommentText, setNewCommentText] = useState([]);   //Captura  o novo comentário
 
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([]); // Adiciona o coment[ario 
+
 
   const publishedDateFormatted = format(publishedAt, "LLLL',' d 'at' h:mmaaa", {
     locale: enUS,
@@ -21,16 +22,17 @@ export function Post({ author, publishedAt, content }) {
     addSuffix: true,
   });
 
-  function handleCreateNewComment(event) {
-    event.preventDefault();
-    setComments([...comments, newCommentText]);
-    setNewCommentText('')
+  function handleNewComment({target}) {   //  Pega o comentario digitado no textarea
+    event.preventDefault();                // Previne o padrao
+    setNewCommentText(target.value);   // Pega o valor digitado pelo o usuario
   }
 
-  function handleNewComment({target}) {
-    event.preventDefault();
-    setNewCommentText(target.value);
+  function handleCreateNewComment(event) {    //  Adiciona o comentario digitado na funcao acima
+    event.preventDefault();    // Previne o padrao
+    setComments([...comments, newCommentText]);  // Recebe os comentarios ja existentes, caso ja exista e adiciona um novo comentario, capaturado pela a funcao acima
+    setNewCommentText('')  // Limpa o textarea
   }
+
 
   return (
     <article className={styles.post}>
