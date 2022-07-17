@@ -8,10 +8,9 @@ import { Comment } from "./Comment";
 import styles from "./Post.module.css";
 
 export function Post({ author, publishedAt, content }) {
-  const [newCommentText, setNewCommentText] = useState([]);   //Captura  o novo comentário
+  const [newCommentText, setNewCommentText] = useState([]); //Captura  o novo comentário
 
-  const [comments, setComments] = useState([]); // Adiciona o coment[ario 
-
+  const [comments, setComments] = useState([]); // Adiciona o coment[ario
 
   const publishedDateFormatted = format(publishedAt, "LLLL',' d 'at' h:mmaaa", {
     locale: enUS,
@@ -22,17 +21,22 @@ export function Post({ author, publishedAt, content }) {
     addSuffix: true,
   });
 
-  function handleNewComment({target}) {   //  Pega o comentario digitado no textarea
-    event.preventDefault();                // Previne o padrao
-    setNewCommentText(target.value);   // Pega o valor digitado pelo o usuario
+  function handleNewComment({ target }) {
+    //  Pega o comentario digitado no textarea
+    event.preventDefault(); // Previne o padrao
+    setNewCommentText(target.value); // Pega o valor digitado pelo o usuario
   }
 
-  function handleCreateNewComment(event) {    //  Adiciona o comentario digitado na funcao acima
-    event.preventDefault();    // Previne o padrao
-    setComments([...comments, newCommentText]);  // Recebe os comentarios ja existentes, caso ja exista e adiciona um novo comentario, capaturado pela a funcao acima
-    setNewCommentText('')  // Limpa o textarea
+  function handleCreateNewComment(event) {
+    //  Adiciona o comentario digitado na funcao acima
+    event.preventDefault(); // Previne o padrao
+    setComments([...comments, newCommentText]); // Recebe os comentarios ja existentes, caso ja exista e adiciona um novo comentario, capaturado pela a funcao acima
+    setNewCommentText(""); // Limpa o textarea
   }
 
+  function deleteCommenet(comment) {
+    console.log(`Delete ${comment}`);
+  }
 
   return (
     <article className={styles.post}>
@@ -80,7 +84,13 @@ export function Post({ author, publishedAt, content }) {
       </form>
       <div className="styles.commentList">
         {comments.map((comment) => {
-          return <Comment key={comment} content={comment} />;
+          return (
+            <Comment
+              key={comment}
+              content={comment}
+              deleteCommenet={deleteCommenet}
+            />
+          );
         })}
       </div>
     </article>

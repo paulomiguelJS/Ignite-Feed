@@ -3,9 +3,10 @@ import { Avatar } from "./Avatar";
 
 import styles from "./Comment.module.css";
 
-export function Comment({content}) {
+export function Comment({content, deleteCommenet}) {
   function handleDeleteComment() {
     console.log('Delete')
+    deleteCommenet(content)
   }
   
   return (
