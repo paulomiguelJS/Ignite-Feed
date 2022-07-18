@@ -21,24 +21,29 @@ export function Post({ author, publishedAt, content }) {
     addSuffix: true,
   });
 
-  function handleNewComment({ target }) {
-    //  Pega o comentario digitado no textarea
-    event.preventDefault(); // Previne o padrao
-    setNewCommentText(target.value); // Pega o valor digitado pelo o usuario
-  }
-
   function handleCreateNewComment(event) {
     //  Adiciona o comentario digitado na funcao acima
     event.preventDefault(); // Previne o padrao
+
     setComments([...comments, newCommentText]); // Recebe os comentarios ja existentes, caso ja exista e adiciona um novo comentario, capaturado pela a funcao acima
     setNewCommentText(""); // Limpa o textarea
   }
 
+  function handleNewComment({ target }) {
+    //  Pega o comentario digitado no textarea
+    target.setCustomValidity('')
+    setNewCommentText(target.value); // Pega o valor digitado pelo o usuario
+  }
+
+  function handleNewCommentInvalid({target}) {
+    target.setCustomValidity("Please, fill out this field");
+  }
+
   function deleteCommenet(commentToDelete) {
-    const commentsWithoutDeleteOne = comments.filter(comment => {
-      return comment !== commentToDelete
-    })
-    setComments(commentsWithoutDeleteOne)
+    const commentsWithoutDeleteOne = comments.filter((comment) => {
+      return comment !== commentToDelete;
+    });
+    setComments(commentsWithoutDeleteOne);
   }
 
   return (
@@ -80,6 +85,8 @@ export function Post({ author, publishedAt, content }) {
           onChange={handleNewComment}
           value={newCommentText}
           placeholder="Leave an comment"
+          required
+          onInvalid={handleNewCommentInvalid}
         ></textarea>
         <footer>
           <button type="submit">Comment</button>
