@@ -34,8 +34,11 @@ export function Post({ author, publishedAt, content }) {
     setNewCommentText(""); // Limpa o textarea
   }
 
-  function deleteCommenet(comment) {
-    console.log(`Delete ${comment}`);
+  function deleteCommenet(commentToDelete) {
+    const commentsWithoutDeleteOne = comments.filter(comment => {
+      return comment !== commentToDelete
+    })
+    setComments(commentsWithoutDeleteOne)
   }
 
   return (
@@ -88,7 +91,7 @@ export function Post({ author, publishedAt, content }) {
             <Comment
               key={comment}
               content={comment}
-              deleteCommenet={deleteCommenet}
+              onDeleteCommenet={deleteCommenet}
             />
           );
         })}
