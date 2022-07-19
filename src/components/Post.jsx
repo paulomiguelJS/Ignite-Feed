@@ -12,6 +12,8 @@ export function Post({ author, publishedAt, content }) {
 
   const [comments, setComments] = useState([]); // Adiciona o coment[ario
 
+  console.log(newCommentText)
+
   const publishedDateFormatted = format(publishedAt, "LLLL',' d 'at' h:mmaaa", {
     locale: enUS,
   });
@@ -45,6 +47,8 @@ export function Post({ author, publishedAt, content }) {
     });
     setComments(commentsWithoutDeleteOne);
   }
+
+  const isNewCommentEmpty = newCommentText.length === 0
 
   return (
     <article className={styles.post}>
@@ -89,7 +93,7 @@ export function Post({ author, publishedAt, content }) {
           onInvalid={handleNewCommentInvalid}
         ></textarea>
         <footer>
-          <button type="submit">Comment</button>
+          <button type="submit" disabled={isNewCommentEmpty}>Comment</button>
         </footer>
       </form>
       <div className="styles.commentList">
