@@ -15,6 +15,7 @@ export function Comment({ content, onDeleteCommenet }) {
   function handleLikeComment() {
     setLikeCount(likeCount + 1)
   }
+  
   return (
     <div className={styles.comment}>
       <Avatar hasBorder={false} src="https://github.com/paulomigueljs.png" />
