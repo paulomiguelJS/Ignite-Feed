@@ -1,18 +1,35 @@
 import { format, formatDistanceToNow } from "date-fns";
 import enUS from "date-fns/locale/en-US";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState, InvalidEvent } from "react";
 
 import { Avatar } from "./Avatar";
 import { Comment } from "./Comment";
 
 import styles from "./Post.module.css";
 
-export function Post({ author, publishedAt, content }) {
+interface Author {
+  name: string;
+  role: string;
+  avatarUrl: string;
+}
+
+interface Content {
+  type: 'paragraph' | 'link';
+  content: string;
+}
+
+interface PostProps {
+  author: Author;
+  publishedAt: Date;
+  content: Content[];
+}
+
+export function Post({ author, publishedAt, content }: PostProps) {
   const [newCommentText, setNewCommentText] = useState([]); //Captura  o novo comentário
 
   const [comments, setComments] = useState([]); // Adiciona o coment[ario
 
-  console.log(newCommentText)
+  console.log(newCommentText);
 
   const publishedDateFormatted = format(publishedAt, "LLLL',' d 'at' h:mmaaa", {
     locale: enUS,
@@ -23,32 +40,31 @@ export function Post({ author, publishedAt, content }) {
     addSuffix: true,
   });
 
-  function handleCreateNewComment(event) {
-    //  Adiciona o comentario digitado na funcao acima
-    event.preventDefault(); // Previne o padrao
+  function handleCreateNewComment(event: FormEvent) {
+   
+    event.preventDefault(); 
 
-    setComments([...comments, newCommentText]); // Recebe os comentarios ja existentes, caso ja exista e adiciona um novo comentario, capaturado pela a funcao acima
-    setNewCommentText(""); // Limpa o textarea
+    setComments([...comments, newCommentText]); 
+    setNewCommentText(""); 
   }
 
-  function handleNewComment({ target }) {
-    //  Pega o comentario digitado no textarea
-    target.setCustomValidity('')
-    setNewCommentText(target.value); // Pega o valor digitado pelo o usuario
+  function handleNewComment(event: ChangeEvent<HTMLTextAreaElement>) {
+    event.target.setCustomValidity("");
+    setNewCommentText(event.target.value); 
   }
 
-  function handleNewCommentInvalid({target}) {
-    target.setCustomValidity("Please, fill out this field");
+  function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
+    event.target.setCustomValidity("Please, fill out this field");
   }
 
-  function deleteCommenet(commentToDelete) {
+  function deleteCommenet(commentToDelete: string) {
     const commentsWithoutDeleteOne = comments.filter((comment) => {
       return comment !== commentToDelete;
     });
     setComments(commentsWithoutDeleteOne);
   }
 
-  const isNewCommentEmpty = newCommentText.length === 0
+  const isNewCommentEmpty = newCommentText.length === 0;
 
   return (
     <article className={styles.post}>
@@ -93,7 +109,9 @@ export function Post({ author, publishedAt, content }) {
           onInvalid={handleNewCommentInvalid}
         ></textarea>
         <footer>
-          <button type="submit" disabled={isNewCommentEmpty}>Comment</button>
+          <button type="submit" disabled={isNewCommentEmpty}>
+            Comment
+          </button>
         </footer>
       </form>
       <div className="styles.commentList">

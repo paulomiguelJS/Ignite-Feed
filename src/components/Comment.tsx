@@ -4,7 +4,12 @@ import { Avatar } from "./Avatar";
 
 import styles from "./Comment.module.css";
 
-export function Comment({ content, onDeleteCommenet }) {
+interface CommentProps {
+  content: string;
+  onDeleteCommenet: (comment: string) => void;
+}
+
+export function Comment({ content, onDeleteCommenet }: CommentProps) {
   const [likeCount, setLikeCount] = useState(0)
 
   function handleDeleteComment() {
